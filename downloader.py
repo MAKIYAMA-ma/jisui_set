@@ -28,14 +28,15 @@ while True:
         # 画像のURLを取得
         img_url = img_element.get_attribute("src")
         print(f"Downloading image: {img_url}")
-        if img_url == pre_img_url:
-            break
-        pre_img_url = img_url
 
         # 画像をダウンロード
         print(f"Downloading image: {img_url}")
         img_data = requests.get(img_url).content
         img_name = os.path.join(DOWNLOAD_FOLDER, os.path.basename(img_url))
+        if img_name == pre_img_url:
+            break
+        pre_img_url = img_name
+
         with open(img_name, 'wb') as img_file:
             img_file.write(img_data)
 
